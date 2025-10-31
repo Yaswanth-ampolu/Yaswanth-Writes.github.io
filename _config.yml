@@ -3,8 +3,8 @@ title: Yaswanth Writes
 description: A blog about my thoughts, ideas, and daily learnings
 author: Yaswanth Ampolu
 email: your.email@example.com
-url: "https://yaswanth-writes.github.io"
-baseurl: ""
+url: "https://yaswanth-ampolu.github.io"
+baseurl: "/Yaswanth-Writes.github.io"
 
 # Build Settings
 markdown: kramdown
