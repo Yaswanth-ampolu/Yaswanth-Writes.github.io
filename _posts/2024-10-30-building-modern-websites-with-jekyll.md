@@ -171,8 +171,8 @@ Layouts are templates that wrap your content. Example `_layouts/post.html`:
 Reusable components you can insert anywhere:
 
 ```liquid
-{% include header.html %}
-{% include navigation.html %}
+{% raw %}{% include header.html %}
+{% include navigation.html %}{% endraw %}
 ```
 
 ### 4. Liquid Templating
@@ -180,7 +180,7 @@ Reusable components you can insert anywhere:
 Jekyll uses Liquid for dynamic content:
 
 ```liquid
-<!-- Loop through posts -->
+{% raw %}<!-- Loop through posts -->
 {% for post in site.posts %}
   <h2>{{ post.title }}</h2>
   <p>{{ post.excerpt }}</p>
@@ -189,7 +189,7 @@ Jekyll uses Liquid for dynamic content:
 <!-- Conditional -->
 {% if page.featured %}
   <span class="badge">Featured</span>
-{% endif %}
+{% endif %}{% endraw %}
 ```
 
 ## Building a Blog
@@ -228,7 +228,7 @@ title: Blog
 ---
 
 <div class="posts">
-  {% for post in site.posts %}
+  {% raw %}{% for post in site.posts %}
     <article class="post">
       <h2>
         <a href="{{ post.url }}">{{ post.title }}</a>
@@ -236,7 +236,7 @@ title: Blog
       <time>{{ post.date | date: "%B %d, %Y" }}</time>
       <p>{{ post.excerpt }}</p>
     </article>
-  {% endfor %}
+  {% endfor %}{% endraw %}
 </div>
 ```
 
@@ -257,7 +257,7 @@ paginate_path: "/blog/page:num/"
 Use in your template:
 
 ```liquid
-{% for post in paginator.posts %}
+{% raw %}{% for post in paginator.posts %}
   <!-- Post content -->
 {% endfor %}
 
@@ -274,7 +274,7 @@ Use in your template:
       <a href="{{ paginator.next_page_path }}">Next</a>
     {% endif %}
   </div>
-{% endif %}
+{% endif %}{% endraw %}
 ```
 
 ### Categories and Tags
@@ -282,14 +282,14 @@ Use in your template:
 Organize posts by categories:
 
 ```liquid
-{% for category in site.categories %}
+{% raw %}{% for category in site.categories %}
   <h3>{{ category[0] }}</h3>
   <ul>
     {% for post in category[1] %}
       <li><a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
   </ul>
-{% endfor %}
+{% endfor %}{% endraw %}
 ```
 
 ### Collections
@@ -322,9 +322,9 @@ Use in templates:
 
 ```liquid
 <nav>
-  {% for item in site.data.navigation %}
+  {% raw %}{% for item in site.data.navigation %}
     <a href="{{ item.link }}">{{ item.name }}</a>
-  {% endfor %}
+  {% endfor %}{% endraw %}
 </nav>
 ```
 
@@ -444,9 +444,9 @@ sass:
 ### 3. Use Jekyll Environment
 
 ```liquid
-{% if jekyll.environment == "production" %}
+{% raw %}{% if jekyll.environment == "production" %}
   <!-- Production-only code (analytics, etc.) -->
-{% endif %}
+{% endif %}{% endraw %}
 ```
 
 Build for production:
@@ -484,7 +484,7 @@ Add to layout:
 
 ```html
 <head>
-  {% seo %}
+  {% raw %}{% seo %}{% endraw %}
 </head>
 ```
 
