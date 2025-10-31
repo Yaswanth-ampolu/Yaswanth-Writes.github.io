@@ -1,0 +1,65 @@
+# Site Settings
+title: Yaswanth Writes
+description: A blog about my thoughts, ideas, and daily learnings
+author: Yaswanth Ampolu
+email: your.email@example.com
+url: "https://yaswanth-writes.github.io"
+baseurl: ""
+
+# Build Settings
+markdown: kramdown
+permalink: /posts/:title
+paginate: 10
+paginate_path: "/posts/page:num/"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /posts/:title
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Yaswanth Ampolu"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# Social Media
+social:
+  twitter: yaswanth_writes
+  github: Yaswanth-Writes
+  linkedin: yaswanth-ampolu
+
+# SEO Settings
+twitter:
+  username: yaswanth_writes
+  card: summary_large_image
+
+# Analytics (optional - add your tracking ID)
+# google_analytics: UA-XXXXXXXXX-X

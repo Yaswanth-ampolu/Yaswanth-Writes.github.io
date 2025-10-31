@@ -1,0 +1,207 @@
+---
+layout: default
+title: All Posts
+description: Browse all blog posts, search and filter by category
+permalink: /posts/
+---
+
+<div class="posts-page">
+  <div class="container">
+    <!-- Page Header -->
+    <header class="page-header">
+      <h1>All Posts</h1>
+      <p>Browse through all blog posts or use the search and filters below</p>
+    </header>
+
+    <!-- Search and Filter Section -->
+    <div class="posts-controls">
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search posts by title or content..."
+          aria-label="Search posts"
+        >
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+      </div>
+
+      <div class="filter-controls">
+        <label for="categoryFilter">Filter by Category:</label>
+        <select id="categoryFilter" aria-label="Filter by category">
+          <option value="all">All Categories</option>
+          {% assign sorted_categories = site.categories | sort %}
+          {% for category in sorted_categories %}
+          <option value="{{ category[0] | slugify }}">{{ category[0] }} ({{ category[1] | size }})</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="sort-controls">
+        <label for="sortOrder">Sort by:</label>
+        <select id="sortOrder" aria-label="Sort posts">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="title">Title (A-Z)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Posts Count -->
+    <div class="posts-count">
+      <p>Showing <span id="postsCount">{{ site.posts | size }}</span> posts</p>
+    </div>
+
+    <!-- Posts Grid -->
+    <div class="posts-grid" id="postsGrid">
+      {% for post in site.posts %}
+      <article class="post-card" data-date="{{ post.date | date: '%s' }}" data-title="{{ post.title | downcase }}" data-categories="{{ post.categories | join: ',' | slugify }}" data-searchable="{{ post.title | downcase }} {{ post.content | strip_html | downcase }}">
+        <div class="post-card-content">
+          <div class="post-card-meta">
+            <time datetime="{{ post.date | date_to_xmlschema }}">
+              {{ post.date | date: "%b %d, %Y" }}
+            </time>
+            <span class="meta-separator">•</span>
+            <span class="reading-time">
+              {% assign words = post.content | number_of_words %}
+              {% if words < 360 %}
+                1 min read
+              {% else %}
+                {{ words | divided_by: 180 }} min read
+              {% endif %}
+            </span>
+          </div>
+
+          <h2 class="post-card-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </h2>
+
+          <p class="post-card-excerpt">
+            {% if post.description %}
+              {{ post.description }}
+            {% else %}
+              {{ post.excerpt | strip_html | truncate: 150 }}
+            {% endif %}
+          </p>
+
+          {% if post.categories %}
+          <div class="post-card-categories">
+            {% for category in post.categories %}
+            <span class="category-tag" data-category="{{ category | slugify }}">{{ category }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <a href="{{ post.url | relative_url }}" class="read-more">
+            Read More →
+          </a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <!-- No Results Message -->
+    <div id="noResults" class="no-results" style="display: none;">
+      <p>No posts found matching your search criteria.</p>
+      <button onclick="resetFilters()" class="btn btn-secondary">Reset Filters</button>
+    </div>
+
+    <!-- Pagination (if needed) -->
+    {% if paginator.total_pages > 1 %}
+    <div class="pagination">
+      {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination-btn">
+        ← Previous
+      </a>
+      {% endif %}
+
+      <span class="pagination-info">
+        Page {{ paginator.page }} of {{ paginator.total_pages }}
+      </span>
+
+      {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | relative_url }}" class="pagination-btn">
+        Next →
+      </a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+// Search and Filter functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('searchInput');
+  const categoryFilter = document.getElementById('categoryFilter');
+  const sortOrder = document.getElementById('sortOrder');
+  const postsGrid = document.getElementById('postsGrid');
+  const postsCount = document.getElementById('postsCount');
+  const noResults = document.getElementById('noResults');
+  let allPosts = Array.from(document.querySelectorAll('.post-card'));
+
+  function filterAndSortPosts() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedCategory = categoryFilter.value;
+    const sortBy = sortOrder.value;
+
+    let visiblePosts = allPosts.filter(post => {
+      const searchable = post.getAttribute('data-searchable');
+      const categories = post.getAttribute('data-categories');
+
+      const matchesSearch = searchable.includes(searchTerm);
+      const matchesCategory = selectedCategory === 'all' || categories.includes(selectedCategory);
+
+      return matchesSearch && matchesCategory;
+    });
+
+    // Sort posts
+    if (sortBy === 'newest') {
+      visiblePosts.sort((a, b) => parseInt(b.getAttribute('data-date')) - parseInt(a.getAttribute('data-date')));
+    } else if (sortBy === 'oldest') {
+      visiblePosts.sort((a, b) => parseInt(a.getAttribute('data-date')) - parseInt(b.getAttribute('data-date')));
+    } else if (sortBy === 'title') {
+      visiblePosts.sort((a, b) => a.getAttribute('data-title').localeCompare(b.getAttribute('data-title')));
+    }
+
+    // Clear grid
+    postsGrid.innerHTML = '';
+
+    // Show/hide posts
+    if (visiblePosts.length === 0) {
+      noResults.style.display = 'block';
+      postsGrid.style.display = 'none';
+    } else {
+      noResults.style.display = 'none';
+      postsGrid.style.display = 'grid';
+      visiblePosts.forEach(post => postsGrid.appendChild(post));
+    }
+
+    // Update count
+    postsCount.textContent = visiblePosts.length;
+  }
+
+  searchInput.addEventListener('input', filterAndSortPosts);
+  categoryFilter.addEventListener('change', filterAndSortPosts);
+  sortOrder.addEventListener('change', filterAndSortPosts);
+
+  // Category links from URL hash
+  if (window.location.hash) {
+    const category = window.location.hash.substring(1);
+    categoryFilter.value = category;
+    filterAndSortPosts();
+  }
+});
+
+function resetFilters() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('categoryFilter').value = 'all';
+  document.getElementById('sortOrder').value = 'newest';
+  window.location.hash = '';
+
+  const event = new Event('input');
+  document.getElementById('searchInput').dispatchEvent(event);
+}
+</script>

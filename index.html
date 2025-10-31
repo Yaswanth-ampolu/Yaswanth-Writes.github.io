@@ -1,0 +1,103 @@
+---
+layout: default
+title: Home
+---
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">Welcome to {{ site.title }}</h1>
+      <p class="hero-description">{{ site.description }}</p>
+      <p class="hero-subtitle">Sharing insights, experiences, and learnings through writing.</p>
+      <div class="hero-cta">
+        <a href="{{ '/posts' | relative_url }}" class="btn btn-primary">Explore Posts</a>
+        <a href="{{ '/about' | relative_url }}" class="btn btn-secondary">About Me</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Latest Posts Section -->
+<section class="latest-posts">
+  <div class="container">
+    <div class="section-header">
+      <h2>Latest Posts</h2>
+      <a href="{{ '/posts' | relative_url }}" class="view-all">View All →</a>
+    </div>
+
+    <div class="posts-grid">
+      {% for post in site.posts limit:6 %}
+      <article class="post-card">
+        <div class="post-card-content">
+          <div class="post-card-meta">
+            <time datetime="{{ post.date | date_to_xmlschema }}">
+              {{ post.date | date: "%b %d, %Y" }}
+            </time>
+            <span class="meta-separator">•</span>
+            <span class="reading-time">
+              {% assign words = post.content | number_of_words %}
+              {% if words < 360 %}
+                1 min read
+              {% else %}
+                {{ words | divided_by: 180 }} min read
+              {% endif %}
+            </span>
+          </div>
+
+          <h3 class="post-card-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </h3>
+
+          <p class="post-card-excerpt">
+            {% if post.description %}
+              {{ post.description }}
+            {% else %}
+              {{ post.excerpt | strip_html | truncate: 120 }}
+            {% endif %}
+          </p>
+
+          {% if post.categories %}
+          <div class="post-card-categories">
+            {% for category in post.categories limit:2 %}
+            <span class="category-tag">{{ category }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <a href="{{ post.url | relative_url }}" class="read-more">
+            Read More →
+          </a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Featured Categories (Optional) -->
+<section class="featured-categories">
+  <div class="container">
+    <h2>Explore by Category</h2>
+    <div class="categories-grid">
+      {% assign categories = site.categories | sort %}
+      {% for category in categories limit:6 %}
+      <a href="{{ '/posts' | relative_url }}#{{ category[0] | slugify }}" class="category-card">
+        <h3>{{ category[0] }}</h3>
+        <p>{{ category[1] | size }} posts</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Stay Updated</h2>
+      <p>Subscribe to get notified about new posts and updates.</p>
+      <a href="{{ '/feed.xml' | relative_url }}" class="btn btn-primary">Subscribe via RSS</a>
+    </div>
+  </div>
+</section>
