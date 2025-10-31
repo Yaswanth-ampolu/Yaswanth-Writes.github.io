@@ -7,57 +7,50 @@ permalink: /about/
 
 # Hi, I'm Yaswanth! 👋
 
-Welcome to my corner of the internet. I'm **Yaswanth Ampolu**, a passionate writer and lifelong learner who believes in the power of sharing knowledge.
+Welcome to my mini internet. I'm **Yaswanth Ampolu**, just a guy who's into travelling , gaming, movies and hustle mindset
 
 ## About This Blog
 
-**Yaswanth Writes** is my personal space where I document my thoughts, ideas, and daily learnings. This blog serves as:
+**Yaswanth Writes** is my personal space where I document my thoughts, ideas, and daily rants. This blog serves as:
 
 - 📚 A knowledge repository for things I learn
 - 💭 A platform to share my perspectives and experiences
-- 🌱 A garden where ideas grow through writing
 - 🤝 A way to connect with like-minded individuals
 
 ## What I Write About
 
 My writing covers a diverse range of topics, including but not limited to:
 
-- **Technology & Programming** - Insights from my coding journey
-- **Personal Development** - Lessons learned and growth mindset
-- **Productivity** - Tips and techniques that work for me
-- **Life Reflections** - Thoughts on everyday experiences
+- **Technology & Programming** - ranting from my coding journey
+- **Game and Movie Reviews** rating games which i played recently and also movies
+- **Personal Development** - Lessons learned, growth and hustle mindset
+- **Productivity** - Tips that worked for me
+- **Life Reflections** - Thoughts on everyday experiences and trauma dump
 - **Book Reviews** - Sharing insights from books I read
 
-## My Philosophy
 
-I believe that:
-
-> "Writing is thinking. To write well is to think clearly. That's why it's so hard."
-> — David McCullough
-
-Through writing, I organize my thoughts, clarify my understanding, and create a dialogue with readers. Every post is an opportunity to learn, both for me and for you.
 
 ## Why "Yaswanth Writes"?
 
-The name is simple and intentional. It's a commitment to the act of writing itself. Not just writing about grand topics, but capturing the small moments, the daily learnings, and the evolving thoughts that make up our lives.
+well im pretty bad at hand-writing as my writing style is ahh 😂 but i used to fill one helluva stories and absolute tier BS in exam sheets so lets see what we gonna cook up this time around
 
 ## Let's Connect
 
-I'd love to hear from you! Whether you have feedback on a post, want to discuss an idea, or just want to say hi:
+I'd love to hear from you! Whether you want to discuss an idea, or just want to say hi or yapp you can just hit my DM:
 
-- 🐦 Twitter: [@yaswanth_writes](https://twitter.com/yaswanth_writes)
-- 💼 LinkedIn: [yaswanth-ampolu](https://linkedin.com/in/yaswanth-ampolu)
-- 🐙 GitHub: [Yaswanth-Writes](https://github.com/Yaswanth-Writes)
-- 📧 Email: your.email@example.com
+- 📑 Portfolio: [My-portfolio](https://yaswanth-ampolu.github.io/Ampolu-Yaswanth/)
+- 💼 LinkedIn: [yaswanth-ampolu](https://www.linkedin.com/in/yaswanth-ampolu-a2b110238/)
+- 🐙 GitHub: [Yaswanth-ampolu](https://github.com/Yaswanth-ampolu)
+- 📧 Email: ampoluyaswanth2002@gmail.com
 
 ## About This Site
 
 This blog is:
 
-- Built with [Jekyll](https://jekyllrb.com/) - A static site generator
+- A Place where i dump my thoughts and  ideas and ponder about my existence
 - Hosted on [GitHub Pages](https://pages.github.com/) - Free and reliable
 - Designed for readability and simplicity
-- Open source - [View on GitHub](https://github.com/Yaswanth-Writes/yaswanth-writes.github.io)
+- Source Code - [View on GitHub](https://github.com/Yaswanth-ampolu/Yaswanth-Writes.github.io/)
 
 ---
 
